@@ -15,7 +15,7 @@
 </nav>
 <nav id="list-1">
 <ul>
-<li  id="aboutme" onclick="goto('./me.html')">
+<li  id="aboutme" onclick="goto('./index.html')">
     About me
     </li>
   <li id="workexp" onclick="goto('./workexp.html')">
@@ -46,6 +46,8 @@
 </nav>
 </div>
 <div class="content">
+  <div class="downarrow"><i class=" fa-solid fa-chevron-up fa-4x" id="goup" style="color:white;"></i></div>
+
 <div class="outer">
 
 
@@ -72,7 +74,7 @@ Flutter mobile application in Dart showcasing the Prom Racing FSAE team. It incl
 </div>
 <div class="main pg-3 small-main">
 <div class="aboutme">
-This website implemented with Javascript, pure CSS and HTML. Link:
+This website implemented with Javascript, pure CSS and HTML.Link:<a href="https://github.com/smaragben/personalpage" target="_blank"> https://github.com/smaragben/personalpage</a>
 </div>
 
 
@@ -80,7 +82,7 @@ This website implemented with Javascript, pure CSS and HTML. Link:
 
 <div class="main pg-4 lg-main">
 <div class="text ">
-Ros implementation of mobile robot wall following and localization using PD controller and EKF filter. Visualized in Gazebo environment. Link:
+Ros implementation of mobile robot wall following and localization using PD controller and EKF filter. Visualized in Gazebo environment. Link: <a href=" https://github.com/smaragben/mobile_robot" target="_blank">https://github.com/smaragben/mobile_robot</a>
 </div>
 <div class="image noborder lg-img">
 <img class="noborder" src="./img/robot.png" />
@@ -92,7 +94,7 @@ Ros implementation of mobile robot wall following and localization using PD cont
 
 <div class="main pg-5 lg-main">
 <div class="text ">
-Prom Racing Telemetry web application. Implemented with Node.Js server. Signals from vehicle are recieved from Telemetry Hub that is connected to the laptop running the server and posted to localhost Grafana server for realtime graphs and InfluxDb server. Grafana is also connected to InfluxDb for non-realtime graphs. Link:
+Prom Racing Telemetry web application. Implemented with Node.Js server. Signals from vehicle are recieved from Telemetry Hub that is connected to the laptop running the server and posted to localhost Grafana server for realtime graphs and InfluxDb server. Grafana is also connected to InfluxDb for non-realtime graphs.
 </div>
 <div class="image noborder lg-img">
 <img class="noborder" src="./img/telemetry.png" />
@@ -100,16 +102,7 @@ Prom Racing Telemetry web application. Implemented with Node.Js server. Signals 
 </div>
 
 </div>
-<div class="main pg-6 lg-main">
-<div class="text ">
-Recognizing emotion in music. Link:
-</div>
-<div class="image noborder">
-<img class="noborder lg-img" src="./img/robot.png" />
 
-</div>
-
-</div>
 </div>
 <div class="indicators">
   <ul>
@@ -128,6 +121,8 @@ Recognizing emotion in music. Link:
 
 
 </div>
+<div class="downarrow"><i class=" fa-solid fa-chevron-down fa-4x" id="godown" style="color:white;"></i></div>
+
 </div>
 </div>
     <div class="bubble">
@@ -158,10 +153,11 @@ setInterval(() => {
         else{
           to=page-1
         }
-        if (to<7 && to>0 && $(window).width()>1000 &&  $(window).height()>950){
+        if (to<6 && to>0 && $(window).width()>1000 &&  $(window).height()>950){
           $( "#ind-"+to.toString() ).click()
-        }
+
     }
+  }
 },1000);
 
 $(window).on("wheel",function(e){
@@ -175,13 +171,15 @@ else{
 });
 
   $( document ).ready(function() {
-    if($(window).width()>1000){
+
     $(".pg-2").hide()
     $(".pg-3").hide()
     $(".pg-4").hide()
     $(".pg-5").hide()
     $(".pg-6").hide()
-}
+    $("#godown").show()
+    $("#goup").hide()
+
   });
   $( window ).resize(function() {
   if($(window).width()>1000){
@@ -195,17 +193,39 @@ else{
 
     show= false;
   }
-  if($(window).width()<1000){
-  $(".pg-1").show()
-  $(".pg-2").show()
-  $(".pg-3").show()
-  $(".pg-4").show()
-  $(".pg-5").show()
-  $(".pg-6").show()
-  }
+
   });
 
+  $("#godown").on('click', function(){
+    var to = page+1
+    if(to< 6){
 
+      $( ".pg-"+to.toString() ).addClass("down")
+      $( ".pg-"+to.toString() ).removeClass("up")
+      $( "#ind-"+to.toString() ).click()
+
+    }
+    if(to == 5){
+      $("#godown").hide()
+    }
+    if(to == 2){
+      $("#goup").show()
+    }
+  })
+  $("#goup").on('click', function(){
+    var to = page-1
+    if(to>0){
+        $( ".pg-"+to.toString() ).addClass("up")
+        $( ".pg-"+to.toString() ).removeClass("down")
+      $( "#ind-"+to.toString() ).click()
+    }
+    if(to == 1){
+      $("#goup").hide()
+    }
+    if(to == 2){
+      $("#godown").show()
+    }
+  })
 </script>
 
 
